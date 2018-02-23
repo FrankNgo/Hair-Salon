@@ -26,5 +26,16 @@ namespace HairSalon.Models.Tests
       //Assert
       Assert.AreEqual(0, result);
     }
+
+  [TestMethod]
+  public void Equals_ReturnsTrueForSameName_Category()
+  {
+    //Arrange, Act
+    Stylist firstStylist = new Stylist("Frank Ngo");
+    Stylist secondStylist = new Stylist("Frank Ngo");
+
+    //assert
+    Assert.AreEqual(firstStylist, secondStylist);
+  }
   }
 }
