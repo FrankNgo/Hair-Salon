@@ -18,7 +18,7 @@ namespace HairSalon.Models.Tests
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=frank_ngo_test;";
     }
     [TestMethod]
-    public void GetAll_CategoriesEmptyAtFirst_0()
+    public void GetAll_StylistList_empty()
     {
       //arrange, act
       int result = Stylist.GetAll().Count;
@@ -27,15 +27,64 @@ namespace HairSalon.Models.Tests
       Assert.AreEqual(0, result);
     }
 
-  [TestMethod]
-  public void Equals_ReturnsTrueForSameName_Category()
-  {
-    //Arrange, Act
-    Stylist firstStylist = new Stylist("Frank Ngo");
-    Stylist secondStylist = new Stylist("Frank Ngo");
+    [TestMethod]
+    public void Equals_ReturnsTrue_Stylist()
+    {
+      //Arrange, Act
+      Stylist firstStylist = new Stylist("Frank Ngo");
+      Stylist secondStylist = new Stylist("Frank Ngo");
 
-    //assert
-    Assert.AreEqual(firstStylist, secondStylist);
-  }
+      //assert
+      Assert.AreEqual(firstStylist, secondStylist);
+    }
+
+    [TestMethod]
+    public void Add_SavesStylistToList_StylistList()
+    {
+      //arrange
+      Stylist testStylist = new Stylist("Frank Ngo");
+      testStylist.Add();
+
+      //act
+      List<Stylist> result = Stylist.GetAll();
+      List<Stylist> testList = new List<Stylist>{testStylist};
+
+      //assert
+      CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Add_SavesIdToStylist_StylistId()
+    {
+      //arrange
+      Stylist testStylist = new Stylist("Frank Ngo");
+      testStylist.Add();
+
+      //act
+      Stylist savedStylist = Stylist.GetAll()[0];
+
+      int result = savedStylist.GetId();
+      int testId = testStylist.GetId();
+
+      //assert
+      Assert.AreEqual(testId, result);
+    }
+
+    [TestMethod]
+    public void GetClients_RetrievesAllClientsWithStylistId_ClientList()
+    {
+      Stylist testStylist = new Stylist("Frank Ngo", 1);
+      testStylist.Add();
+
+      Client firstClient = new Client("Frank Ngo", 1, testStylist.GetId());
+      firstClient.Add();
+      Client secondClient = new Client("Frank Ngo", 2,  testStylist.GetId());
+      secondClient.Add();
+
+      List<Client> testClientList = new List<Client> {firstClient, secondClient};
+      List<Client> resultClientList = testStylist.GetClients();
+
+      CollectionAssert.AreEqual(testClientList, resultClientList);
+    }
   }
 }
