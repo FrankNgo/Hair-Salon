@@ -8,6 +8,12 @@ A program to add employees to a list.  Each employee can add clients to a list u
 
 ## Specifications
 
+
+- Input for all stylists fields can save and get user data
+  - Example input:
+    - First Name: Frank Ngo
+  - Example output:
+    - On list: "Frank Ngo" is stored in variable firstName.
 - User can add a new stylist to the list of stylists
   - Example input:
     - Name: Frank Ngo
