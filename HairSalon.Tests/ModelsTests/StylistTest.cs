@@ -37,5 +37,15 @@ namespace HairSalon.Models.Tests
       Assert.AreEqual(lastNameResult,testLastName);
       Assert.AreEqual(idResult,testId);
     }
+
+    [TestMethod]
+    public void GetAll_DatebaseEmptyAtFirst_0()
+    {
+      //arrange, act
+      int result = Stylist.GetAll().Count;
+
+      //assert
+      Assert.AreEqual(0, result);
+    }
   }
 }
