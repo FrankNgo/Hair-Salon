@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+<h1>Clients</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var client in Model["clients"])
+    {
+      <tr>
+        <td>@client.GetClientFirstName()</td>
+        <td>@client.GetClientLastName()</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add new Client</a>
+<a href="/">Return to Home</a>

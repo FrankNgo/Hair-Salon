@@ -3,14 +3,13 @@
 }
 
 <h1>Hair Salon</h1>
-<a href="/stylists/new">Add New Stylist</a>
-<a href="/">Return to Home</a>
 
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
+      <th>Clients</th>
       <th>Delete</th>
     </tr>
   </thead>
@@ -21,8 +20,11 @@
       <tr>
         <td>@stylist.GetFirstName()</td>
         <td>@stylist.GetLastName()</td>
+        <td><a href="/stylists/@stylist.GetId()"><span class="glyphicon glyphicon-list-alt"></span></a></td>
         <td><a href="/stylists/@stylist.GetId()/delete"><span class="glyphicon glyphicon-remove"></span></a></td>
       </tr>
     }
   </tbody>
 </table>
+<a href="/stylists/new">Add New Stylist</a>
+<a href="/">Return to Home</a>
