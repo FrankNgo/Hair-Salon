@@ -11,7 +11,7 @@ namespace HairSalon.Models.Tests
     public void Dispose()
     {
       // Client.DeleteAll();
-      // Stylist.DeleteAll();
+      Stylist.DeleteAll();
     }
     public StylistTest()
     {
@@ -61,6 +61,33 @@ namespace HairSalon.Models.Tests
 
       //assert
       CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Save_AssignedIdToObject_Id()
+    {
+      //arrange
+      Stylist testStylist = new Stylist("Frank", "Ngo");
+
+      //act
+      testStylist.Save();
+      Stylist savedStylist = Stylist.GetAll()[0];
+      int result = savedStylist.GetId();
+      int testId = testStylist.GetId();
+
+      //assert
+      Assert.AreEqual(testId, result);
+    }
+
+    [TestMethod]
+    public void Equals_ReturnsTrueIfAllSame_Stylist()
+    {
+      //arrange, act
+      Stylist firstStylist = new Stylist("Frank", "Ngo");
+      Stylist secondStylist = new Stylist("Frank", "Ngo");
+
+      //assert
+      Assert.AreEqual(firstStylist, secondStylist);
     }
   }
 }
