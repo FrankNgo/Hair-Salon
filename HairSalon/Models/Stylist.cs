@@ -89,8 +89,81 @@ namespace HairSalon.Models
         bool firstNameEquality = (this.GetFirstName() == newStylist.GetFirstName());
         bool lastNameEquality = (this.GetLastName() == newStylist.GetLastName());
         bool idEquality = (this.GetId() == newStylist.GetId());
-        return (firstNameEquality && lastNameEquality && rawDateEquality && idEquality);
+        return (firstNameEquality && lastNameEquality && idEquality);
       }
+    }
+
+    public static void DeleteAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists;";
+
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists WHERE id = @SylistId;";
+      MySqlParameter stylistIdParameter = new MySqlParameter();
+      stylistIdParameter.ParameterName = "@SylistId";
+      stylistIdParameter.Value = this._id;
+
+      cmd.Parameters.Add(stylistIdParameter);
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public static Stylist Find(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * from `stylists` WHERE id = @thisId;";
+
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@thisId";
+      thisId.Value = id;
+      cmd.Parameters.Add(thisId);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int stylistId = 0;
+      string stylistFirstName = "";
+      string stylistLastName = "";
+
+      while (rdr.Read())
+      {
+        stylistId = rdr.GetInt32(2);
+        stylistFirstName = rdr.GetString(0);
+        stylistLastName = rdr.GetString(1);
+      }
+
+      Stylist foundStylist = new Stylist(stylistFirstName, stylistLastName, stylistId);
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return foundStylist;
     }
   }
 }

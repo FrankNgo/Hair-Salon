@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Hair Salon</h1>
+<a href="/stylists/new">Add New Stylist</a>
+<a href="/">Return to Home</a>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @foreach (var stylist in Model)
+    {
+      <tr>
+        <td>@stylist.GetFirstName()</td>
+        <td>@stylist.GetLastName()</td>
+        <td><a href="/stylists/@stylist.GetId()/delete"><span class="glyphicon glyphicon-remove"></span></a></td>
+      </tr>
+    }
+  </tbody>
+</table>
