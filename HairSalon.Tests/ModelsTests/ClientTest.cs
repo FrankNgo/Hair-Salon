@@ -10,8 +10,8 @@ namespace HairSalon.Tests
   {
     public void Dispose()
     {
-      // Student.DeleteAll();
-      // Course.DeleteAll();
+      Stylist.DeleteAll();
+      Client.DeleteAll();
     }
     public ClientTest()
     {
@@ -46,6 +46,37 @@ namespace HairSalon.Tests
 
       //assert
       Assert.AreEqual(0, result);
+    }
+
+    [TestMethod]
+    public void Save_SavesToDatabase_CoursesList()
+    {
+      //arrange
+      Client testClient = new Client("Joe", "Smith");
+
+      //act
+      testClient.Save();
+      List<Client> result = Client.GetAll();
+      List<Client> testList = new List<Client>{testClient};
+
+      //assert
+      CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Save_AssignedIdToObject_Id()
+    {
+      //arrange
+      Client testClient = new Client("Joe", "Smith");
+
+      //act
+      testClient.Save();
+      Client savedClient = Client.GetAll()[0];
+      int result = savedClient.GetClientId();
+      int testId = testClient.GetClientId();
+
+      //assert
+      Assert.AreEqual(testId, result);
     }
   }
 }
