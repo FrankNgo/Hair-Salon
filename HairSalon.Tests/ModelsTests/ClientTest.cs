@@ -37,5 +37,15 @@ namespace HairSalon.Tests
       Assert.AreEqual(clientLastNameResult,testClientLastName);
       Assert.AreEqual(idResult,testId);
     }
+
+    [TestMethod]
+    public void GetAll_DatebaseEmptyAtFirst_0()
+    {
+      //arrange, act
+      int result = Client.GetAll().Count;
+
+      //assert
+      Assert.AreEqual(0, result);
+    }
   }
 }
