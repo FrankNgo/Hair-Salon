@@ -29,7 +29,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylist;";
+      cmd.CommandText = @"SELECT * FROM stylists;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -39,13 +39,58 @@ namespace HairSalon.Models
         Stylist newStylist = new Stylist(firstName,lastName,id);
         allStylist.Add(newStylist);
       }
-      
+
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
       return allStylist;
+    }
+
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO `stylists` (`first_name`,`last_name`) VALUES (@FirstName, @LastName);";
+
+      MySqlParameter firstName = new MySqlParameter();
+      firstName.ParameterName = "@FirstName";
+      firstName.Value = this._firstName;
+
+      MySqlParameter lastName = new MySqlParameter();
+      lastName.ParameterName = "@LastName";
+      lastName.Value = this._lastName;
+
+      cmd.Parameters.Add(firstName);
+      cmd.Parameters.Add(lastName);
+
+      cmd.ExecuteNonQuery();
+      _id = (int) cmd.LastInsertedId;
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public override bool Equals(System.Object otherStylist)
+    {
+      if(!(otherStylist is Stylist))
+      {
+        return false;
+      }
+      else
+      {
+        Stylist newStylist = (Stylist) otherStylist;
+        bool firstNameEquality = (this.GetFirstName() == newStylist.GetFirstName());
+        bool lastNameEquality = (this.GetLastName() == newStylist.GetLastName());
+        bool idEquality = (this.GetId() == newStylist.GetId());
+        return (firstNameEquality && lastNameEquality && rawDateEquality && idEquality);
+      }
     }
   }
 }
