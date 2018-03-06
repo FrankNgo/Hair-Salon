@@ -30,7 +30,7 @@ namespace HairSalon.Tests
       //act
       string clientFirstNameResult = newClient.GetClientFirstName();
       string clientLastNameResult = newClient.GetClientLastName();
-      int idResult = newClient.GetClientId();
+      int idResult = newClient.GetId();
 
       //assert
       Assert.AreEqual(clientFirstNameResult,testClientFirstName);
@@ -49,7 +49,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void Save_SavesToDatabase_CoursesList()
+    public void Save_SavesToDatabase_ClientList()
     {
       //arrange
       Client testClient = new Client("Joe", "Smith");
@@ -72,8 +72,8 @@ namespace HairSalon.Tests
       //act
       testClient.Save();
       Client savedClient = Client.GetAll()[0];
-      int result = savedClient.GetClientId();
-      int testId = testClient.GetClientId();
+      int result = savedClient.GetId();
+      int testId = testClient.GetId();
 
       //assert
       Assert.AreEqual(testId, result);
