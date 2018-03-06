@@ -38,6 +38,36 @@ A program to add employees to a list.  Each employee can add clients to a list u
 ### Installing
 
   * Open Terminal
+  * Start by importing the databases
+  * Download the application MAMP from https://www.mamp.info/en/
+  * Open the application and press "Start Server"
+  * Select "Open Start Page"
+  * Under tools in the main toolbar select "phpMyAdmin"
+  * This will take you to the database control interface
+  * Click the import button from the top tool bar and select the included "frank_ngo.sql" file to start importing it
+  * Select the "Go" button to start importing the database and repeat for all included database files
+  * You can also manually set up the databases by using a terminal and entering in:
+  ```
+  $ C:\MAMP\bin\mysql\bin\mysql -uroot -proot -P8889
+  ```
+  From your command line once you've logged into MySQL, create the database and tables via the following instructions.
+
+  For Main Database
+  ```
+  CREATE DATABASE kayla_ondracek;
+  USE kayla_ondracek;
+  CREATE TABLE `clients` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `first_name` varchar(255) DEFAULT NULL,
+    `last_name` varchar(255) DEFAULT NULL,
+    `stylist_id` int(11) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CREATE TABLE `stylists` (
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ```
   * Cd to desktop or where user would like to store directory by typing in: cd Desktop
   * Copy application contents by typing in your Terminal: git clone https://github.com/FrankNgo/HairSalon.git
   * Navigate to the application directory by typing in: cd Word-Counter
