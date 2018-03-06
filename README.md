@@ -54,8 +54,24 @@ A program to add employees to a list.  Each employee can add clients to a list u
 
   For Main Database
   ```
-  CREATE DATABASE kayla_ondracek;
-  USE kayla_ondracek;
+  CREATE DATABASE frank_ngo;
+  USE frank_ngo;
+  CREATE TABLE `clients` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `first_name` varchar(255) DEFAULT NULL,
+    `last_name` varchar(255) DEFAULT NULL,
+    `stylist_id` int(11) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CREATE TABLE `stylists` (
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ```
+  For Test Database
+  ```
+  CREATE DATABASE frank_ngo;
+  USE frank_ngo;
   CREATE TABLE `clients` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `first_name` varchar(255) DEFAULT NULL,
