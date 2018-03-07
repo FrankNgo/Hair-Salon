@@ -85,7 +85,7 @@ A program to add employees to a list.  Each employee can add clients to a list u
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   ```
   * Cd to desktop or where user would like to store directory by typing in: cd Desktop
-  * Copy application contents by typing in your Terminal: git clone https://github.com/FrankNgo/HairSalon.git
+  * Copy application contents by typing in your Terminal: git clone https://github.com/FrankNgo/Hair-Salon.git
   * Navigate to the application directory by typing in: cd Word-Counter
   * Restore the applications dependencies by typing in: dotnet restore
   * Build the application by typing in: dotnet build
